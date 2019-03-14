@@ -1,0 +1,22 @@
+sh build.sh
+set -x
+cp Dockerfile target/
+tar -czf target.tgz target
+echo yes | scp -i $KEY target.tgz $USER@$IP:
+
+ssh $USER@$IP -i $KEY << EOF
+
+sudo yum install docker -y
+sudo yum install java-1.8.0-openjdk-devel.x86_64 -y
+
+tar -xf target.tgz
+cp target/Dockerfile ./
+
+docker build -t spring-boot-hello-world .
+
+docker run -d -p 8080:8080 spring-boot-hello-world
+
+echo "check http://$IP:8080/swagger-ui.html"
+echo "Make sure port 8080 is allowed in SG"
+
+EOF
