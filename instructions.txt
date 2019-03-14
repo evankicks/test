@@ -1,0 +1,15 @@
+Instructions
+
+1. git clone git@github.com:evankicks/test.git
+
+2. tar -xvf vpc.tar
+
+3. cd VPC
+
+4. Initialize terraform to get the dependencies setup (terraform init)
+
+5. terraform plan to perform a dry run (terraform plan)
+
+6. terraform apply to execute (terraform apply)
+
+
